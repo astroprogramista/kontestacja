@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>main catalog</title>
+	</head>
+	<body>
+		<audio id="audio" controls="controls" ></audio>
+		<div id="titles" ></div>
+	</body>
+	<script type="text/javascript">
+		function play(url){
+			document.getElementById("audio").src = url;
+			document.getElementById("audio").play();
+		}
+		window.KonteStacja = new Object();
+		KonteStacja.mainCatalogArrived = function(catalog){
+			catalog = catalog.reverse();
+			var s = "<table>";
+			var div = document.getElementById("titles");
+			for(var c in catalog){
+				c = catalog[c];
+				s += "<tr><td>"+c.id
+				+"</td><td><a href=\"#\" onlick=\"play('http://www.kontestacja.com/"+c.mp3Url+"\')\">mp3</a>"
+				+"</td><td>"+(c.oggUrl?("<a href=\"#\" onlick=\"play('"+c.oggUrl+"\')\">ogg</a>"):"no ogg")
+				+"</td><td>"+c.broadcast
+				+"</td><td>"+c.title
+			 	+"</td></tr>";
+			}
+			div.innerHTML = s;
+		}
+	</script>
+	<!--
+	<script type="text/javascript" src="../../catalog/main.js"></script>
+	-->
+	<script type="text/javascript" src="http://kontestacja.googlecode.com/hg/catalog/main.js"></script>
+</html>
