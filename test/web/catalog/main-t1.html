@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>main catalog</title>
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dijit/themes/tundra/tundra.css">
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/resources/dojo.css" />
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/Grid.css" />
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojox/grid/resources/tundraGrid.css" />
+		<style type="text/css">
+			.audioBox{ height: 70px; }
+			#audioInfo{ height: 20px;  }
+			#audioError{ height: 20px; color: red;}
+		</style>
+	</head>
+	<body>
+	  <div class="audioBox">
+		<audio id="audio" controls="controls" ></audio>
+	  </div>
+	  <div id="audioInfo"></div>
+	  <div id="audioError"></div>
+	  <div style="width: 600px; height: 400px;">
+		<table dojoType="dojox.grid.DataGrid" jsId="grid0" id="ksGrid" autoWidth="true" loadingMessage="loading catalog">
+			<thead>
+				<th field="id">id</th>
+				<th field="date">date</th>
+				<th field="broadcast" width="120px">bcast</th>
+				<th field="title" width="200px">title</th>
+				<th field="oggUrl" formatter="formatterOgg" width="30px">ogg</th>
+			</thead>
+		</table>
+	  </div>
+	</body>
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" type="text/javascript" 
+		djConfig="parseOnLoad: true"></script>
+	<script type="text/javascript">
+  		dojo.require("dojox.grid.DataGrid");
+  		dojo.require("dojo.data.ItemFileReadStore");
+	</script>
+	<script type="text/javascript">
+		function formatterOgg(ogg){
+			return ogg?"+":"";
+		}
+		function play(url){
+			document.getElementById("audio").src = url;
+			document.getElementById("audio").play();
+		}
+		window.KonteStacja = new Object();
+		KonteStacja.mainCatalogTableArrived = function(catalog){
+			catalog = catalog.reverse();
+	
+		}
+		KonteStacja.mainCatalogArrived = function(catalog){	
+			catalog = catalog.reverse();
+			var data = {  
+				'identifier': 'id',
+ 				'items': catalog
+ 			};
+			dojo.addOnLoad(function(){
+				var store = new dojo.data.ItemFileReadStore({'data': data});
+				var grid = dijit.byId("ksGrid");
+				grid.setStore(store);
+				dojo.connect(grid,"onRowDblClick",function(ev){
+					var e = ev.grid.getItem(ev.rowIndex);
+					try{
+						var audio = dojo.byId("audio");
+						var canPlayOgg = ("no" != audio.canPlayType("audio/ogg")) && ("" != audio.canPlayType("audio/ogg"));
+						var canPlayMp3 = ("no" != audio.canPlayType("audio/mpeg")) && ("" != audio.canPlayType("audio/mpeg"));
+						var src = null;
+						if(canPlayMp3)
+							src = "http://kontestacja.com/"+e.mp3Url[0];
+						else if(canPlayOgg){
+							if(e.oggUrl)
+								src = e.oggUrl[0];
+							else
+								dojo.byId("audioError").textContent = "sorry, your browser doesn't support mp3 and there isn't ogg file available now";
+						}else{
+							dojo.byId("audioError").textContent = "sorry, your browser doesn't support mp3 nor ogg";
+						}
+						if(src){
+							audio.src = src;
+							audio.play();
+							dojo.byId("audioInfo").textContent = e.id[0]+" "+e.date[0]+" "+e.broadcast[0]+" "+e.title[0];
+							dojo.byId("audioError").textContent = "";
+						}
+					}catch(e){
+					}
+				});
+			});
+					
+		}
+	</script>
+	<script type="text/javascript" src="http://kontestacja.googlecode.com/hg/catalog/main.js"></script>
+	
+	
+</html>
