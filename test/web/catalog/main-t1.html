@@ -78,6 +78,7 @@
 							dojo.byId("audioError").textContent = "sorry, your browser doesn't support mp3 nor ogg";
 						}
 						if(src){
+							audio.controls = null;
 							audio.controls = "controls";
 							audio.src = src;
 							audio.play();
