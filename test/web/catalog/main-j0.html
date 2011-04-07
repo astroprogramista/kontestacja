@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>main catalog</title>
+		<style type="text/css">
+			/*<![CDATA[*/
+			.audioBox{ height: 70px; }
+			#audioInfo{ height: 20px;  }
+			#audioError{ height: 20px; color: red;}
+			#ksCatalogContainer{
+				width: 600px;
+				height: 400px;
+				overflow-y: scroll;
+			}
+			#ksCatalogContainer table {
+				border-collapse: collapse;
+			}
+			#ksCatalogContainer table,th,td {
+				 border: 1px solid black;
+			 }
+			 tr:nth-child(even) {background: #CCC}
+			 tr:nth-child(odd) {background: #FFF}
+			 tr:hover{background: orange }
+			 tr.selected {background: #009E35 }
+			 /*]]>*/
+		</style>
+		<!-- jPlayer -->
+		<!-- off
+		<link rel="stylesheet" type="text/css" href="http://www.jplayer.org/css/jPlayer.css" />
+		-->
+		<link rel="stylesheet" type="text/css" href="http://www.jplayer.org/latest/skin/jplayer.blue.monday.css" />
+		<!-- !jPlayer -->
+	</head>
+	<body>  
+	  
+	  <!-- jPlayer -->
+	  <div id="jPlayer0" class="jp-jplayer"></div>
+
+		<div class="jp-audio">
+			<div class="jp-type-single">
+				<div id="jp_interface_0" class="jp-interface">
+					<ul class="jp-controls">
+						<li><a href="#" class="jp-play" tabindex="1">play</a></li>
+						<li><a href="#" class="jp-pause" tabindex="1">pause</a></li>
+						<li><a href="#" class="jp-stop" tabindex="1">stop</a></li>
+
+						<li><a href="#" class="jp-mute" tabindex="1">mute</a></li>
+						<li><a href="#" class="jp-unmute" tabindex="1">unmute</a></li>
+					</ul>
+					<div class="jp-progress">
+						<div class="jp-seek-bar">
+							<div class="jp-play-bar"></div>
+						</div>
+					</div>
+
+					<div class="jp-volume-bar">
+						<div class="jp-volume-bar-value"></div>
+					</div>
+					<div class="jp-current-time"></div>
+					<div class="jp-duration"></div>
+				</div>
+				<div id="jp_playlist_0" class="jp-playlist">
+					<ul>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- !jPlayer -->
+	  
+	  <div id="ksCatalogContainer"></div>
+	  <div id="ksEditor" class="ksEditor">
+		  <div class="ksId" ></div>
+		  <div class="ksDate"></div>
+		  <div class="ksBcast"></div>
+		  <div class="ksTitle"></div>
+		  <div class="ksDescr"></div>
+		  <form>
+		  	<div>Tags:<input type="text" class="ksTags" ></div>
+		  </form>
+	  </div>
+	</body>
+	
+	<script type="text/javascript">
+//<![CDATA[
+		window.KonteStacja = new Object();		
+		KonteStacja.mainCatalogArrived = function(catalog){	
+			catalog = catalog.reverse();
+			KonteStacja.Catalog.main = catalog;		
+		}
+		KonteStacja.showDetails = function(episode){
+			var ed = $("#ksEditor");
+			ed.attr("episodeId",episode.id);
+			$(".ksId",ed).text(episode.id);
+			$(".ksDate",ed).text(episode.date);
+			$(".ksBcast",ed).text(episode.broadcast);
+			$(".ksTitle",ed).text(episode.title);
+			$(".ksDescr",ed).text(episode.descr);
+			
+		}
+		KonteStacja.play = function(episode){
+			var media = new Object();
+			media.m4a = "http://www.kontestacja.com/"+episode.mp3Url;
+			if(episode.oggUrl)
+				media.oga = episode.oggUrl;
+			var player = $("#jPlayer0");
+			player.jPlayer("setMedia",media);
+			player.jPlayer("play");
+			player.attr("episodeId",episode.id);
+			$("#jp_playlist_0 li").text(episode.id+" "+episode.date+" "+episode.broadcast+": "+episode.title);
+		}
+		KonteStacja.episodeConfirmed = function(eId){
+			var e = KonteStacja.Catalog.find(eId);
+			if(e)
+				KonteStacja.play(e);
+			return true;
+		}
+		KonteStacja.episodeSelected = function(eId){
+			var e = KonteStacja.Catalog.find(eId);
+			if(e)
+				KonteStacja.showDetails(e);
+			return true;
+		}
+		KonteStacja.Editor = new Object();
+		KonteStacja.Catalog = new Object();
+		KonteStacja.Catalog.find = function(eId){
+			for(var e in this.main)
+				if(this.main[e].id == eId)
+					return this.main[e];
+			return null;
+		};
+		KonteStacja.Catalog.render = function(container){
+			var c = $(container);
+			c.empty();
+			var t = $("<table>",{id: "ksCatalogTable"});
+			t.append("<thead><tr><th>id</th><th>date</th><th>bcast</th><th>title</th><th>ogg</th></tr></thead>");
+			for(var e in this.main){
+				e = this.main[e];
+				t.append(
+				$("<tr>", { 
+					episodeId: e.id,
+					click: function(e){
+						var eId = $(this).attr("episodeId");
+						if($(this).is(".selected")){
+							KonteStacja.episodeConfirmed(eId);
+						}else{
+							$("tr.selected").removeClass("selected");
+							if(KonteStacja.episodeSelected(eId))
+								$(this).addClass("selected");
+						}
+					},				
+				  })
+					.append("<td>"+e.id+"</td>")
+					.append("<td>"+e.date+"</td>")
+					.append("<td>"+e.broadcast+"</td>")
+					.append("<td>"+e.title+"</td>")
+					.append("<td>"+(e.oggUrl?"+":"")+"</td>")
+				);
+			}
+			c.append(t);
+		}
+//]]>
+	</script>
+	<script type="text/javascript" src="http://kontestacja.googlecode.com/hg/catalog/main.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../web/lib/jPlayer/jQuery.jPlayer.2.0.0/jquery.jplayer.min.js"></script>
+	<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	$("#jPlayer0").jPlayer({
+		ended: function (event) {
+			$(this).jPlayer("play");
+		},
+		swfPath: "../../../web/lib/jPlayer/jQuery.jPlayer.2.0.0",
+		supplied: "m4a, oga",
+		cssSelectorAncestor: "#jp_interface_0",
+	});
+	KonteStacja.Catalog.render("#ksCatalogContainer");
+	/*
+	
+	$("#ksEditor .ksTags").bind('keyup', function(evt){
+		var ns = $(this).attr('storeNamespace');
+		var n = $(this).attr('storeName');
+		var s = $(this).attr('storeLocal');
+		var ctx = $(this).attr('storeContext');
+		localStorage[ns+"."+eval(ctx)+"."+n] = $(this).val();
+	});
+	*/
+});
+//]]>
+	</script>
+	
+</html>
