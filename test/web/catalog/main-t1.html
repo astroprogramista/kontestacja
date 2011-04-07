@@ -19,6 +19,18 @@
 	  </div>
 	  <div id="audioInfo"></div>
 	  <div id="audioError"></div>
+	  
+	  <div id="ksEditor">
+		  <div id="ksEId" ></div>
+		  <div id="ksEDate"></div>
+		  <div id="ksEBcast"></div>
+		  <div id="ksETitle"></div>
+		  <div id="ksEDescr"></div>
+		  <form>
+		  	<div>Tags:<input type="text" id="ksETags" onkeyup="KonteStacja.Editor.onKeyUp(event)"></div>
+		  </form>
+	  </div>
+	  
 	  <div style="width: 600px; height: 400px;">
 		<table dojoType="dojox.grid.DataGrid" jsId="grid0" id="ksGrid" autoWidth="true" loadingMessage="loading catalog">
 			<thead>
@@ -30,6 +42,7 @@
 			</thead>
 		</table>
 	  </div>
+	  
 	</body>
 	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6/dojo/dojo.xd.js" type="text/javascript" 
 		djConfig="parseOnLoad: true"></script>
@@ -50,6 +63,28 @@
 			catalog = catalog.reverse();
 	
 		}
+		KonteStacja.Editor = new Object();
+		KonteStacja.Editor.setGridItem = function(gridItem){
+			var gi = gridItem;
+			dojo.byId("ksEditor").setAttribute("ksId",gi.id[0]);
+			dojo.byId("ksEId").textContent = gi.id[0];
+			dojo.byId("ksEDate").textContent = gi.date[0];
+			dojo.byId("ksEBcast").textContent = gi.broadcast[0];
+			dojo.byId("ksETitle").textContent = gi.title[0];
+			dojo.byId("ksEDescr").textContent = gi.descr[0];
+			dojo.byId("ksETags").value = localStorage["ksCatalog."+gi.id[0]+".ksETags"];
+		}
+		KonteStacja.Editor.onKeyUp = function(evt){
+			var ksId = dojo.byId("ksEditor").getAttribute("ksId")
+			//alert(ksId);
+			if(ksId){
+				//window.lastEvent = evt;
+				var id = evt.target.id;
+				if(id)
+					localStorage["ksCatalog."+ksId+"."+id] = evt.target.value;
+			}
+		}
+		
 		KonteStacja.mainCatalogArrived = function(catalog){	
 			catalog = catalog.reverse();
 			var data = {  
@@ -62,6 +97,7 @@
 				grid.setStore(store);
 				dojo.connect(grid,"onRowDblClick",function(ev){
 					var e = ev.grid.getItem(ev.rowIndex);
+					//KonteStacja.Editor.setGridItem(e);
 					try{
 						var audio = dojo.byId("audio");
 						var canPlayOgg = ("no" != audio.canPlayType("audio/ogg")) && ("" != audio.canPlayType("audio/ogg"));
@@ -78,6 +114,7 @@
 							dojo.byId("audioError").textContent = "sorry, your browser doesn't support mp3 nor ogg";
 						}
 						if(src){
+							audio.setAttribute("ksId",e.id[0]);
 							audio.src = src;
 							audio.play();
 							dojo.byId("audioInfo").textContent = e.id[0]+" "+e.date[0]+" "+e.broadcast[0]+" "+e.title[0];
@@ -87,6 +124,10 @@
 						}
 					}catch(e){
 					}
+				});
+				dojo.connect(grid,"onRowClick",function(ev){
+					var gi = ev.grid.getItem(ev.rowIndex);
+					KonteStacja.Editor.setGridItem(gi);
 				});
 			});
 					
