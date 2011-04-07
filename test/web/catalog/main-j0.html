@@ -23,6 +23,7 @@
 			 tr:nth-child(odd) {background: #FFF}
 			 tr:hover{background: orange }
 			 tr.selected {background: #009E35 }
+			 .ksEventTime input{ width: 4em; }
 			 /*]]>*/
 		</style>
 		<!-- jPlayer -->
@@ -33,7 +34,9 @@
 		<!-- !jPlayer -->
 	</head>
 	<body>  
-	  
+	
+	  <div id="ksCatalogContainer"></div>
+
 	  <!-- jPlayer -->
 	  <div id="jPlayer0" class="jp-jplayer"></div>
 
@@ -68,8 +71,7 @@
 			</div>
 		</div>
 		<!-- !jPlayer -->
-	  
-	  <div id="ksCatalogContainer"></div>
+		
 	  <div id="ksEditor" class="ksEditor">
 		  <div class="ksId" ></div>
 		  <div class="ksDate"></div>
@@ -78,12 +80,53 @@
 		  <div class="ksDescr"></div>
 		  <form>
 		  	<div>Tags:<input type="text" class="ksTags" ></div>
+		  	<!--
+		  	<input type="range" name="time" min="1" max="180" />
+			Event:<input type="text" class="ksEvent" >Time:<input type="text" class="ksTime"><input class="ksAddEvent" type="button" value="add">
+			-->
+			Event:<input type="text" class="ksEvent" >Time:<span class="ksEventTime"></span><button type="button" class="ksPick" >pick</button>
+		    <div class="ksEvents">
+				
+		    </div>
 		  </form>
 	  </div>
 	</body>
+	<script type="text/javascript">
+//<![CDATA[
+
+	function initTimeSetter(element){
+		$(element)
+			//.append($("<form class='TimeSetter'>")
+				.append("<input type='number' class='timeH' min='0' max='12'>")
+				.append("<input type='number' class='timeM' min='0' max='59'>")
+				.append("<input type='number' class='timeS' min='0' max='59'>")
+			//)
+		;
+	}
+	function getTime(timeSetter){
+		var t = $(timeSetter);
+		return  parseInt($(".timeH",t).val())*60*60
+			+parseInt($(".timeM",t).val())*60
+			+parseInt($(".timeS",t).val());
+	}
+	
+	function setTime(timeSetter, sec){
+		var myTime = new Date(sec * 1000);
+		var hour = myTime.getUTCHours();
+		var min = myTime.getUTCMinutes();
+		var sec = myTime.getUTCSeconds();
+		var t = $(timeSetter);
+		$(".timeH",t).val(hour);
+		$(".timeM",t).val(min);
+		$(".timeS",t).val(sec);
+	}
+	
+//]]>
+	</script>
 	
 	<script type="text/javascript">
 //<![CDATA[
+		
 		window.KonteStacja = new Object();		
 		KonteStacja.mainCatalogArrived = function(catalog){	
 			catalog = catalog.reverse();
@@ -98,6 +141,7 @@
 			$(".ksTitle",ed).text(episode.title);
 			$(".ksDescr",ed).text(episode.descr);
 			
+				
 		}
 		KonteStacja.play = function(episode){
 			var media = new Object();
@@ -168,6 +212,7 @@
 	<script type="text/javascript">
 //<![CDATA[
 $(document).ready(function(){
+	window.currentPlayerTime = 0;
 	$("#jPlayer0").jPlayer({
 		ended: function (event) {
 			$(this).jPlayer("play");
@@ -177,6 +222,9 @@ $(document).ready(function(){
 		cssSelectorAncestor: "#jp_interface_0",
 	});
 	KonteStacja.Catalog.render("#ksCatalogContainer");
+	initTimeSetter("#ksEditor .ksEventTime");
+	$("#ksEditor .ksPick").click(function(evt){ setTime("#ksEditor .ksEventTime", Math.floor(window.currentPlayerTime)); });
+	$("#jPlayer0").bind($.jPlayer.event.progress, function(event){ window.currentPlayerTime = event.jPlayer.status.currentTime;});
 	/*
 	
 	$("#ksEditor .ksTags").bind('keyup', function(evt){
