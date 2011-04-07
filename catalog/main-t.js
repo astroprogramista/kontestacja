@@ -548,5 +548,6 @@ KonteStacja.mainCatalogTableArrived(
 [581,"2011-04-04","Wydanie Główne - Marcin Hugo Kosiński","Ile zarabiają sluchacze KonteStacji?","Co zrobić, by więcej zarabiać? Dziś odkryjemy tajemną receptę na podwyżkę. A Martin powie, za co go ściga prokuratura.","audio/KS_2011-04-04.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/581_11-04-04_WydanieGlowne.ogg"],
 [582,"2011-04-05","KontestCoke","Rezerwa czastkowa i pieniadz bankowy","Problemy zwiazane z rezerwa czastkowa","audio/24/KontestCoke_2011-04-05.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/582_11-04-05_KontestCoke.ogg"],
 [583,"2011-04-05","Konserwa","Maghreb i Lewant dalej kipi¹","Konserwa - ponownie wracamy do tematu rewolt w krajach arabskich. Porozmawialiśmy o Libii i Donaldarze Tuskafim, ups... tzn. Muchomorze Kadafim. O sytuacji w innych krajach arabskich, zaangażowaniu UE i imigrantach płynących bez żadnego oporu do Europy. Żyć nie umierać... Ale i tak posłuchajcie!","audio/16/KS_2011-04-05.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/583_11-04-05_Konserwa.ogg"],
+[584,"2011-04-07","Komentarz ekonomiczny Instytutu Misesa","Bazylea 2,3... 100?","Komentarz ekonomiczny Instytutu Misesa o regulacjach bankowych","audio/17/KS_2011-04-07.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/584_11-04-07_KEIM.ogg"],
 ]
 );
