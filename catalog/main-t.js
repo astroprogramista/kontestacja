@@ -552,5 +552,6 @@ KonteStacja.mainCatalogTableArrived(
 [585,"2011-04-05","Świat Kamila C.","Grzegorz Turniak BNI - O świadomym budowaniu kariery","Rozmowa z Grzegorzem Turniakiem, założycielem BNI i wielu innych firm. Rozmowa na temat budowania świadomego kariery.","audio/4/KS_2011-04-05.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/585_11-04-05_SwiatKamilaC.ogg"],
 [586,"2011-04-07","Prawniczek","Czego nie lubią sędziowie?","Czyli o tym czy na sali rozpraw wolno jeść, pić i palić.","audio/21/KS_2011-04-07.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/586_11-04-07_Prawniczek.ogg"],
 [587,"2011-04-07","Lewatywa Mózgu - Martin Lechowicz","Spółdzielnia kontra kapitalizm","O spółdzielniach, które walczą z kapitalizmem, o zakazie płatnej jazdy na stopa, o upadku Portugalii i o twórcy T-Raperów znad Wisły.","audio/KS_2011-04-07.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/587_11-04-07_LewatywaMozgu.ogg"],
+[588,"2011-04-06","Jan Fijor zaprasza","Janek rozmawia z Michelem Marbotem twórcą Malmy","Rozmowa z Michelem Marborbotem twórcą polskiej firmy Malma znanej na całym świecie, która padłą ofiarą mafii.","audio/3/KS_2011-04-06.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/588_11-04-06_JanFijorZaprasza.ogg"],
 ]
 );
