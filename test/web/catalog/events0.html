@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div id="ksEditor" class="ksEditor">
+		  <div class="ksId" ></div>
+		  <div class="ksDate"></div>
+		  <div class="ksBcast"></div>
+		  <div class="ksTitle"></div>
+		  <div class="ksDescr"></div>
+		  <form>
+		  	<p>Tags:<input type="text" class="ksTags" /><button type="button" class="ksSave">save</button></p>
+			Event:<input type="text" class="ksEvent" />Time:<span class="ksEventTime"></span><button type="button" class="ksPick" >pick</button><button type="button" class="ksAdd" >add</button>
+		    <div class="ksEvents">
+				
+		    </div>
+		  </form>
+	  	</div>
+	  	<div id="log" ></div>
+	</body>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script type="text/javascript">
+//<![CDATA[
+
+window.KonteStacja = new Object();
+KonteStacja.Player = new Object();
+KonteStacja.Player.currentTime = 0;
+KonteStacja.Catalog = new Object();
+KonteStacja.Editor = new Object();
+KonteStacja.Editor.selector = "#ksEditor";
+KonteStacja.Editor.setTagObject = function(eId, tag){
+	this.user_eid = eId;
+	this.user_tag = tag;
+	var e = $(this.selector);
+	e.attr("user_eid",eId);
+	$(".ksTags", e).val(tag.tags);
+	this.redrawEvents();
+}
+KonteStacja.Editor.delEvent = function (idx){
+	//console.dir(ctx);
+	this.user_tag.events.splice(idx,1);
+	this.redrawEvents();
+}
+KonteStacja.Editor.addEditedEvent = function (){
+	var e = $(this.selector);
+	var ev = new Object();
+	ev.s = $(".ksEvent",e).val();
+	ev.t = this.getEventTime();
+	if(!this.user_tag)
+		return;
+	if(!this.user_tag.events)
+		this.user_tag.events = [];
+	this.user_tag.events.push(ev);
+	this.user_tag.events.sort(function(a,b){ return a.t>b.t; });
+	this.redrawEvents();
+}
+KonteStacja.Editor.redrawEvents = function (){
+	var events = $(".ksEvents", $(this.selector));
+	events.empty();
+	if(this.user_tag && this.user_tag.events){
+		for(var i in this.user_tag.events){
+			var ev = this.user_tag.events[i];
+			console.log(ev);
+			events.append($("<div>",{
+				class: 'ksEventObject',
+				text: KonteStacja.timeToString(ev.t)+" "+ev.s,
+				event_idx: i,
+				})
+				.append($("<button type='button'>del</button>")
+					.click(i, function(e){KonteStacja.Editor.delEvent(e.data);})
+				)
+			);
+		}
+	}
+}
+
+KonteStacja.timeToString = function(sec){
+	var myTime = new Date(sec * 1000);
+	var hour = ""+myTime.getUTCHours();
+	var min = ""+myTime.getUTCMinutes();
+	var sec = ""+myTime.getUTCSeconds();
+	if(min.length==1)
+		min = "0"+min;
+	if(sec.length==1)
+		sec = "0"+sec;
+	return ""+hour+":"+min+":"+sec;
+}
+KonteStacja.Editor.init = function(){
+	this.initEventTime();
+	$(".ksPick",$(this.selector)).click(function(){ KonteStacja.Editor.setEventTime(KonteStacja.Player.currentTime);});
+	$(".ksAdd",$(this.selector)).click(function(){KonteStacja.Editor.addEditedEvent();});
+	$(".ksSave",$(this.selector)).click(function(){KonteStacja.Editor.save();});
+}
+KonteStacja.Editor.initEventTime = function (){
+	$(".ksEventTime",$(this.selector))
+		//.append($("<form class='TimeSetter'>")
+				.append("<input type='number' class='timeH' min='0' max='12'>")
+				.append("<input type='number' class='timeM' min='0' max='59'>")
+				.append("<input type='number' class='timeS' min='0' max='59'>")
+		//)
+		;
+}
+KonteStacja.Editor.save = function(){
+	if(this.user_eid&&this.user_tag)
+		localStorage.setItem("ksCatalog.user."+this.user_eid,JSON.stringify(this.user_tag));
+}
+KonteStacja.Editor.load = function(episodeId){
+	var t = localStorage.getItem("ksCatalog.user."+episodeId);
+	if(t)
+		try{
+			t = JSON.parse(t);
+		}catch(e){console.error(e);}
+	if(!t)
+		t = new Object();
+	this.setTagObject(episodeId, t);	
+}
+KonteStacja.Editor.getEventTime = function (){
+	var t = $(".ksEventTime",$(this.selector));
+	return  parseInt($(".timeH",t).val())*60*60
+			+parseInt($(".timeM",t).val())*60
+			+parseInt($(".timeS",t).val());
+}
+KonteStacja.Editor.setEventTime = function(sec){
+	var myTime = new Date(sec * 1000);
+	var hour = myTime.getUTCHours();
+	var min = myTime.getUTCMinutes();
+	var sec = myTime.getUTCSeconds();
+	var t = $(".ksEventTime",$(this.selector));
+	$(".timeH",t).val(hour);
+	$(".timeM",t).val(min);
+	$(".timeS",t).val(sec);	
+}
+
+function loadAllUserTags(){
+	var ret = {};
+	for(var i=0; i<localStorage.length; i++){
+		var k = localStorage.key(i);
+		var m = k.match("^ksCatalog\.user\.(\\d+)");
+		if(m){
+			var v = localStorage.getItem(k);
+			try{
+				console.log(k+"="+v);
+				v = JSON.parse(v);
+				ret[m[1]] = v;
+			}catch(e){
+				console.error(e);
+				localStorage.removeItem(k);
+			}
+		}			
+	}
+	return ret;
+}
+function log(msg){
+	$("#log").append("<p>"+msg+"</p>");
+}
+
+$(document).ready(function(){
+		KonteStacja.Editor.init();
+		KonteStacja.Catalog.user = loadAllUserTags();
+		KonteStacja.Editor.setTagObject(123, {tags:'jan f, ziggi',events:[ {t:23132, s:'dzwoni krawiec'} ] });
+		KonteStacja.Editor.setEventTime(234);
+		console.log(KonteStacja.Editor.getEventTime());
+});
+
+//]]>
+	</script>
+</html>

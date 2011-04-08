@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>main catalog</title>
+		<style type="text/css">
+			/*<![CDATA[*/
+			.audioBox{ height: 70px; }
+			#audioInfo{ height: 20px;  }
+			#audioError{ height: 20px; color: red;}
+			#ksCatalogContainer{
+				width: 600px;
+				height: 400px;
+				overflow-y: scroll;
+			}
+			#ksCatalogContainer table {
+				border-collapse: collapse;
+			}
+			#ksCatalogContainer table,th,td {
+				 border: 1px solid black;
+			 }
+			 tr:nth-child(even) {background: #CCC}
+			 tr:nth-child(odd) {background: #FFF}
+			 tr:hover{background: orange }
+			 tr.selected {background: #009E35 }
+			 .ksEventTime input{ width: 3em; }
+			 /*]]>*/
+		</style>
+		<!-- jPlayer -->
+		<!-- off
+		<link rel="stylesheet" type="text/css" href="http://www.jplayer.org/css/jPlayer.css" />
+		-->
+		
+		<!-- off
+		<link rel="stylesheet" type="text/css" href="http://www.jplayer.org/latest/skin/jplayer.blue.monday.css" />
+		-->
+		<link rel="stylesheet" type="text/css" href="../../../web/css/jplayer.blue.monday.css" />
+		<!-- !jPlayer -->
+	</head>
+	<body>  
+	
+	  <div id="ksCatalogContainer"></div>
+
+	  <!-- jPlayer -->
+	  <div id="jPlayer0" class="jp-jplayer"></div>
+
+		<div class="jp-audio">
+			<div class="jp-type-single">
+				<div id="jp_interface_0" class="jp-interface">
+					<ul class="jp-controls">
+						<li><a href="#" class="jp-play" tabindex="1">play</a></li>
+						<li><a href="#" class="jp-pause" tabindex="1">pause</a></li>
+						<li><a href="#" class="jp-stop" tabindex="1">stop</a></li>
+
+						<li><a href="#" class="jp-mute" tabindex="1">mute</a></li>
+						<li><a href="#" class="jp-unmute" tabindex="1">unmute</a></li>
+					</ul>
+					<div class="jp-progress">
+						<div class="jp-seek-bar">
+							<div class="jp-play-bar"></div>
+						</div>
+					</div>
+
+					<div class="jp-volume-bar">
+						<div class="jp-volume-bar-value"></div>
+					</div>
+					<div class="jp-current-time"></div>
+					<div class="jp-duration"></div>
+				</div>
+				<div id="jp_playlist_0" class="jp-playlist">
+					<ul>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- !jPlayer -->
+		
+	  <div id="ksEditor" class="ksEditor">
+		  <div class="ksId" ></div>
+		  <div class="ksDate"></div>
+		  <div class="ksBcast"></div>
+		  <div class="ksTitle"></div>
+		  <div class="ksDescr"></div>
+		  <form>
+		  	<p>Tags:<input type="text" class="ksTags" /><button type="button" class="ksSave">save</button><button type="button" class="ksSend">send</button></p>
+			Event:<input type="text" class="ksEvent" />Time:<span class="ksEventTime"></span><button type="button" class="ksPick" >pick</button><button type="button" class="ksPlay" >play</button><button type="button" class="ksAdd" >add</button>
+		    <div class="ksEvents">
+				
+		    </div>
+		  </form>
+	  </div>
+	</body>
+	<script type="text/javascript">
+
+	</script>
+	
+	<script type="text/javascript">
+//<![CDATA[
+		
+		window.KonteStacja = new Object();
+		KonteStacja.Editor = new Object();		
+		KonteStacja.Player = new Object();
+		KonteStacja.Player.currentTime = 0;
+		KonteStacja.Player.play = function(sec){
+			$("#jPlayer0").jPlayer("play",sec);
+		}
+		KonteStacja.mainCatalogArrived = function(catalog){	
+			catalog = catalog.reverse();
+			KonteStacja.Catalog.main = catalog;		
+		}
+		KonteStacja.showDetails = function(episode){
+			var ed = $("#ksEditor");
+			ed.attr("episodeId",episode.id);
+			$(".ksId",ed).text(episode.id);
+			$(".ksDate",ed).text(episode.date);
+			$(".ksBcast",ed).text(episode.broadcast);
+			$(".ksTitle",ed).text(episode.title);
+			$(".ksDescr",ed).text(episode.descr);
+			this.Editor.load(episode.id);
+		}
+		KonteStacja.play = function(episode){
+			var media = new Object();
+			media.m4a = "http://www.kontestacja.com/"+episode.mp3Url;
+			if(episode.oggUrl)
+				media.oga = episode.oggUrl;
+			var player = $("#jPlayer0");
+			player.jPlayer("setMedia",media);
+			player.jPlayer("play");
+			player.attr("episodeId",episode.id);
+			$("#jp_playlist_0 li").text(episode.id+" "+episode.date+" "+episode.broadcast+": "+episode.title);
+		}
+		KonteStacja.episodeConfirmed = function(eId){
+			var e = KonteStacja.Catalog.find(eId);
+			if(e)
+				KonteStacja.play(e);
+			return true;
+		}
+		KonteStacja.episodeSelected = function(eId){
+			var e = KonteStacja.Catalog.find(eId);
+			if(e)
+				KonteStacja.showDetails(e);
+			return true;
+		}
+		KonteStacja.Catalog = new Object();
+		KonteStacja.Catalog.find = function(eId){
+			for(var e in this.main)
+				if(this.main[e].id == eId)
+					return this.main[e];
+			return null;
+		};
+		KonteStacja.Catalog.render = function(container){
+			var c = $(container);
+			c.empty();
+			var t = $("<table>",{id: "ksCatalogTable"});
+			t.append("<thead><tr><th>id</th><th>date</th><th>bcast</th><th>title</th><th>ogg</th></tr></thead>");
+			for(var e in this.main){
+				e = this.main[e];
+				t.append(
+				$("<tr>", { 
+					episodeId: e.id,
+					click: function(e){
+						var eId = $(this).attr("episodeId");
+						if($(this).is(".selected")){
+							KonteStacja.episodeConfirmed(eId);
+						}else{
+							$("tr.selected").removeClass("selected");
+							if(KonteStacja.episodeSelected(eId))
+								$(this).addClass("selected");
+						}
+					},				
+				  })
+					.append("<td>"+e.id+"</td>")
+					.append("<td>"+e.date+"</td>")
+					.append("<td>"+e.broadcast+"</td>")
+					.append("<td>"+e.title+"</td>")
+					.append("<td>"+(e.oggUrl?"+":"")+"</td>")
+				);
+			}
+			c.append(t);
+		}
+		
+// EDITOR
+KonteStacja.Editor.setTagObject = function(eId, tag){
+	this.user_eid = eId;
+	this.user_tag = tag;
+	var e = $(this.selector);
+	e.attr("user_eid",eId);
+	$(".ksTags", e).val(tag.tags);
+	this.redrawEvents();
+}
+KonteStacja.Editor.delEvent = function (idx){
+	//console.dir(ctx);
+	this.user_tag.events.splice(idx,1);
+	this.redrawEvents();
+}
+KonteStacja.Editor.addEditedEvent = function (){
+	var e = $(this.selector);
+	var ev = new Object();
+	ev.s = $(".ksEvent",e).val();
+	ev.t = this.getEventTime();
+	if(!this.user_tag)
+		return;
+	if(!this.user_tag.events)
+		this.user_tag.events = [];
+	this.user_tag.events.push(ev);
+	this.user_tag.events.sort(function(a,b){ return a.t>b.t; });
+	this.redrawEvents();
+}
+KonteStacja.Editor.redrawEvents = function (){
+	var events = $(".ksEvents", $(this.selector));
+	events.empty();
+	if(this.user_tag && this.user_tag.events){
+		for(var i in this.user_tag.events){
+			var ev = this.user_tag.events[i];
+			console.log(ev);
+			events.append($("<div>",{
+				class: 'ksEventObject',
+				text: KonteStacja.timeToString(ev.t)+" "+ev.s,
+				event_idx: i,
+				})
+				.click(ev.t, function(e){KonteStacja.Player.play(e.data); })
+				.append($("<button type='button'>del</button>")
+					.click(i, function(e){KonteStacja.Editor.delEvent(e.data);})
+				)
+			);
+		}
+	}
+}
+
+KonteStacja.timeToString = function(sec){
+	var myTime = new Date(sec * 1000);
+	var hour = ""+myTime.getUTCHours();
+	var min = ""+myTime.getUTCMinutes();
+	var sec = ""+myTime.getUTCSeconds();
+	if(min.length==1)
+		min = "0"+min;
+	if(sec.length==1)
+		sec = "0"+sec;
+	return ""+hour+":"+min+":"+sec;
+}
+KonteStacja.Editor.init = function(){
+	this.initEventTime();
+	$(".ksPick",$(this.selector)).click(function(){ KonteStacja.Editor.setEventTime(KonteStacja.Player.currentTime);});
+	$(".ksAdd",$(this.selector)).click(function(){KonteStacja.Editor.addEditedEvent();});
+	$(".ksSave",$(this.selector)).click(function(){KonteStacja.Editor.save();});
+	$(".ksTags",$(this.selector)).bind("keyup",function(){ if(KonteStacja.Editor.user_tag)KonteStacja.Editor.user_tag.tags = $(this).val(); });
+	$(".ksPlay",$(this.selector)).click(function(){KonteStacja.Player.play(KonteStacja.Editor.getEventTime());});
+	$(".ksSend",$(this.selector)).click(function(){KonteStacja.Editor.send();});
+}
+KonteStacja.Editor.initEventTime = function (){
+	$(".ksEventTime",$(this.selector))
+		//.append($("<form class='TimeSetter'>")
+				.append("<input type='number' class='timeH' min='0' max='12'>")
+				.append("<input type='number' class='timeM' min='0' max='59'>")
+				.append("<input type='number' class='timeS' min='0' max='59'>")
+		//)
+		;
+}
+KonteStacja.Editor.save = function(){
+	if(this.user_eid&&this.user_tag)
+		localStorage.setItem("ksCatalog.user."+this.user_eid,JSON.stringify(this.user_tag));
+}
+KonteStacja.Editor.load = function(episodeId){
+	var t = localStorage.getItem("ksCatalog.user."+episodeId);
+	if(t)
+		try{
+			t = JSON.parse(t);
+		}catch(e){console.error(e);}
+	if(!t)
+		t = new Object();
+	this.setTagObject(episodeId, t);	
+}
+KonteStacja.Editor.getEventTime = function (){
+	var t = $(".ksEventTime",$(this.selector));
+	return  parseInt($(".timeH",t).val())*60*60
+			+parseInt($(".timeM",t).val())*60
+			+parseInt($(".timeS",t).val());
+}
+KonteStacja.Editor.setEventTime = function(sec){
+	var myTime = new Date(sec * 1000);
+	var hour = myTime.getUTCHours();
+	var min = myTime.getUTCMinutes();
+	var sec = myTime.getUTCSeconds();
+	var t = $(".ksEventTime",$(this.selector));
+	$(".timeH",t).val(hour);
+	$(".timeM",t).val(min);
+	$(".timeS",t).val(sec);	
+}
+
+KonteStacja.Editor.send = function(){
+	var mail = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+	mail+="<user_tags>\n";
+	mail+="\t<user_tag>\n";
+	mail+="\t\t<episode>"+this.user_eid+"</episode>\n"
+	mail+="\t\t<tags><![CDATA["+this.user_tag.tags+"]]></tags>\n";
+	if(this.user_tag.events){
+		mail+="\t\t<events>\n";
+		for(var e in this.user_tag.events){
+			e = this.user_tag.events[e];
+			mail+="\t\t\t<event time=\""+e.t+"\"><![CDATA["+e.s+"]]></events>\n";
+		}
+		mail+="\t\t</events>\n";
+	}
+	mail+="\t</user_tag>\n";
+	mail+="</user_tags>\n";
+	//alert(mail);
+	var url = "mailto:kontest_katalog@o2.pl?subject=user_tags for "+this.user_eid+"&"+$.param({body: mail});
+	console.log(url);
+	var w = window.open(url, 'email');
+	w.close();
+}
+// !EDITOR
+
+//]]>
+	</script>
+	<script type="text/javascript" src="http://kontestacja.googlecode.com/hg/catalog/main.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../web/lib/jPlayer/jQuery.jPlayer.2.0.0/jquery.jplayer.min.js"></script>
+	<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+	window.currentPlayerTime = 0;
+	$("#jPlayer0").jPlayer({
+		ended: function (event) {
+			$(this).jPlayer("play");
+		},
+		swfPath: "../../../web/lib/jPlayer/jQuery.jPlayer.2.0.0",
+		supplied: "m4a, oga",
+		cssSelectorAncestor: "#jp_interface_0",
+	});
+	KonteStacja.Catalog.render("#ksCatalogContainer");
+	KonteStacja.Editor.selector = "#ksEditor";
+	KonteStacja.Editor.init();
+	$("#jPlayer0").bind($.jPlayer.event.timeupdate, function(event){ KonteStacja.Player.currentTime = event.jPlayer.status.currentTime;});
+	/*
+	initTimeSetter("#ksEditor .ksEventTime");
+	$("#ksEditor .ksPick").click(function(evt){ setTime("#ksEditor .ksEventTime", Math.floor(window.currentPlayerTime)); });
+	
+	*/
+	/*
+	
+	$("#ksEditor .ksTags").bind('keyup', function(evt){
+		var ns = $(this).attr('storeNamespace');
+		var n = $(this).attr('storeName');
+		var s = $(this).attr('storeLocal');
+		var ctx = $(this).attr('storeContext');
+		localStorage[ns+"."+eval(ctx)+"."+n] = $(this).val();
+	});
+	*/
+});
+//]]>
+	</script>
+	
+</html>
