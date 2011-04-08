@@ -298,14 +298,14 @@ KonteStacja.Editor.send = function(){
 		mail+="\t\t<events>\n";
 		for(var e in this.user_tag.events){
 			e = this.user_tag.events[e];
-			mail+="\t\t\t<event time=\""+e.t+"\"><![CDATA["+e.s+"]]></events>\n";
+			mail+="\t\t\t<event time=\""+e.t+"\"><![CDATA["+e.s+"]]></event>\n";
 		}
 		mail+="\t\t</events>\n";
 	}
 	mail+="\t</user_tag>\n";
 	mail+="</user_tags>\n";
 	//alert(mail);
-	var url = "mailto:kontest_katalog@o2.pl?subject=user_tags for "+this.user_eid+"&"+$.param({body: mail});
+	var url = "mailto:kontest_katalog@o2.pl?subject=user_tags for "+this.user_eid+"&body="+mail;
 	console.log(url);
 	var w = window.open(url, 'email');
 	w.close();
