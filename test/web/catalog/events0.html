@@ -25,6 +25,8 @@
 //<![CDATA[
 
 window.KonteStacja = new Object();
+KonteStacja.Player = new Object();
+KonteStacja.Player.currentTime = 0;
 KonteStacja.Catalog = new Object();
 KonteStacja.Editor = new Object();
 KonteStacja.Editor.selector = "#ksEditor";
@@ -87,7 +89,9 @@ KonteStacja.timeToString = function(sec){
 }
 KonteStacja.Editor.init = function(){
 	this.initEventTime();
+	$(".ksPick",$(this.selector)).click(function(){ KonteStacja.Editor.setEventTime(KonteStacja.Player.currentTime);});
 	$(".ksAdd",$(this.selector)).click(function(){KonteStacja.Editor.addEditedEvent();});
+	$(".ksSave",$(this.selector)).click(function(){KonteStacja.Editor.save();});
 }
 KonteStacja.Editor.initEventTime = function (){
 	$(".ksEventTime",$(this.selector))
@@ -97,6 +101,20 @@ KonteStacja.Editor.initEventTime = function (){
 				.append("<input type='number' class='timeS' min='0' max='59'>")
 		//)
 		;
+}
+KonteStacja.Editor.save = function(){
+	if(this.user_eid&&this.user_tag)
+		localStorage.setItem("ksCatalog.user."+this.user_eid,JSON.stringify(this.user_tag));
+}
+KonteStacja.Editor.load = function(episodeId){
+	var t = localStorage.getItem("ksCatalog.user."+episodeId);
+	if(t)
+		try{
+			t = JSON.parse(t);
+		}catch(e){console.error(e);}
+	if(!t)
+		t = new Object();
+	this.setTagObject(episodeId, t);	
 }
 KonteStacja.Editor.getEventTime = function (){
 	var t = $(".ksEventTime",$(this.selector));
