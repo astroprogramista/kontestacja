@@ -23,7 +23,7 @@
 			 tr:nth-child(odd) {background: #FFF}
 			 tr:hover{background: orange }
 			 tr.selected {background: #009E35 }
-			 .ksEventTime input{ width: 4em; }
+			 .ksEventTime input{ width: 3em; }
 			 /*]]>*/
 		</style>
 		<!-- jPlayer -->
@@ -84,7 +84,7 @@
 		  <div class="ksDescr"></div>
 		  <form>
 		  	<p>Tags:<input type="text" class="ksTags" /><button type="button" class="ksSave">save</button></p>
-			Event:<input type="text" class="ksEvent" />Time:<span class="ksEventTime"></span><button type="button" class="ksPick" >pick</button>
+			Event:<input type="text" class="ksEvent" />Time:<span class="ksEventTime"></span><button type="button" class="ksPick" >pick</button><button type="button" class="ksPlay" >play</button><button type="button" class="ksAdd" >add</button>
 		    <div class="ksEvents">
 				
 		    </div>
@@ -92,42 +92,19 @@
 	  </div>
 	</body>
 	<script type="text/javascript">
-//<![CDATA[
 
-	function initTimeSetter(element){
-		$(element)
-			//.append($("<form class='TimeSetter'>")
-				.append("<input type='number' class='timeH' min='0' max='12'>")
-				.append("<input type='number' class='timeM' min='0' max='59'>")
-				.append("<input type='number' class='timeS' min='0' max='59'>")
-			//)
-		;
-	}
-	function getTime(timeSetter){
-		var t = $(timeSetter);
-		return  parseInt($(".timeH",t).val())*60*60
-			+parseInt($(".timeM",t).val())*60
-			+parseInt($(".timeS",t).val());
-	}
-	
-	function setTime(timeSetter, sec){
-		var myTime = new Date(sec * 1000);
-		var hour = myTime.getUTCHours();
-		var min = myTime.getUTCMinutes();
-		var sec = myTime.getUTCSeconds();
-		var t = $(timeSetter);
-		$(".timeH",t).val(hour);
-		$(".timeM",t).val(min);
-		$(".timeS",t).val(sec);
-	}
-	
-//]]>
 	</script>
 	
 	<script type="text/javascript">
 //<![CDATA[
 		
-		window.KonteStacja = new Object();		
+		window.KonteStacja = new Object();
+		KonteStacja.Editor = new Object();		
+		KonteStacja.Player = new Object();
+		KonteStacja.Player.currentTime = 0;
+		KonteStacja.Player.play = function(sec){
+			$("#jPlayer0").jPlayer("play",sec);
+		}
 		KonteStacja.mainCatalogArrived = function(catalog){	
 			catalog = catalog.reverse();
 			KonteStacja.Catalog.main = catalog;		
@@ -140,8 +117,7 @@
 			$(".ksBcast",ed).text(episode.broadcast);
 			$(".ksTitle",ed).text(episode.title);
 			$(".ksDescr",ed).text(episode.descr);
-			
-				
+			this.Editor.load(episode.id);
 		}
 		KonteStacja.play = function(episode){
 			var media = new Object();
@@ -166,7 +142,6 @@
 				KonteStacja.showDetails(e);
 			return true;
 		}
-		KonteStacja.Editor = new Object();
 		KonteStacja.Catalog = new Object();
 		KonteStacja.Catalog.find = function(eId){
 			for(var e in this.main)
@@ -204,6 +179,115 @@
 			}
 			c.append(t);
 		}
+		
+// EDITOR
+KonteStacja.Editor.setTagObject = function(eId, tag){
+	this.user_eid = eId;
+	this.user_tag = tag;
+	var e = $(this.selector);
+	e.attr("user_eid",eId);
+	$(".ksTags", e).val(tag.tags);
+	this.redrawEvents();
+}
+KonteStacja.Editor.delEvent = function (idx){
+	//console.dir(ctx);
+	this.user_tag.events.splice(idx,1);
+	this.redrawEvents();
+}
+KonteStacja.Editor.addEditedEvent = function (){
+	var e = $(this.selector);
+	var ev = new Object();
+	ev.s = $(".ksEvent",e).val();
+	ev.t = this.getEventTime();
+	if(!this.user_tag)
+		return;
+	if(!this.user_tag.events)
+		this.user_tag.events = [];
+	this.user_tag.events.push(ev);
+	this.user_tag.events.sort(function(a,b){ return a.t>b.t; });
+	this.redrawEvents();
+}
+KonteStacja.Editor.redrawEvents = function (){
+	var events = $(".ksEvents", $(this.selector));
+	events.empty();
+	if(this.user_tag && this.user_tag.events){
+		for(var i in this.user_tag.events){
+			var ev = this.user_tag.events[i];
+			console.log(ev);
+			events.append($("<div>",{
+				class: 'ksEventObject',
+				text: KonteStacja.timeToString(ev.t)+" "+ev.s,
+				event_idx: i,
+				})
+				.click(ev.t, function(e){KonteStacja.Player.play(e.data); })
+				.append($("<button type='button'>del</button>")
+					.click(i, function(e){KonteStacja.Editor.delEvent(e.data);})
+				)
+			);
+		}
+	}
+}
+
+KonteStacja.timeToString = function(sec){
+	var myTime = new Date(sec * 1000);
+	var hour = ""+myTime.getUTCHours();
+	var min = ""+myTime.getUTCMinutes();
+	var sec = ""+myTime.getUTCSeconds();
+	if(min.length==1)
+		min = "0"+min;
+	if(sec.length==1)
+		sec = "0"+sec;
+	return ""+hour+":"+min+":"+sec;
+}
+KonteStacja.Editor.init = function(){
+	this.initEventTime();
+	$(".ksPick",$(this.selector)).click(function(){ KonteStacja.Editor.setEventTime(KonteStacja.Player.currentTime);});
+	$(".ksAdd",$(this.selector)).click(function(){KonteStacja.Editor.addEditedEvent();});
+	$(".ksSave",$(this.selector)).click(function(){KonteStacja.Editor.save();});
+	$(".ksTags",$(this.selector)).bind("keyup",function(){ if(KonteStacja.Editor.user_tag)KonteStacja.Editor.user_tag.tags = $(this).val(); });
+	$(".ksPlay",$(this.selector)).click(function(){KonteStacja.Player.play(KonteStacja.Editor.getEventTime());});
+}
+KonteStacja.Editor.initEventTime = function (){
+	$(".ksEventTime",$(this.selector))
+		//.append($("<form class='TimeSetter'>")
+				.append("<input type='number' class='timeH' min='0' max='12'>")
+				.append("<input type='number' class='timeM' min='0' max='59'>")
+				.append("<input type='number' class='timeS' min='0' max='59'>")
+		//)
+		;
+}
+KonteStacja.Editor.save = function(){
+	if(this.user_eid&&this.user_tag)
+		localStorage.setItem("ksCatalog.user."+this.user_eid,JSON.stringify(this.user_tag));
+}
+KonteStacja.Editor.load = function(episodeId){
+	var t = localStorage.getItem("ksCatalog.user."+episodeId);
+	if(t)
+		try{
+			t = JSON.parse(t);
+		}catch(e){console.error(e);}
+	if(!t)
+		t = new Object();
+	this.setTagObject(episodeId, t);	
+}
+KonteStacja.Editor.getEventTime = function (){
+	var t = $(".ksEventTime",$(this.selector));
+	return  parseInt($(".timeH",t).val())*60*60
+			+parseInt($(".timeM",t).val())*60
+			+parseInt($(".timeS",t).val());
+}
+KonteStacja.Editor.setEventTime = function(sec){
+	var myTime = new Date(sec * 1000);
+	var hour = myTime.getUTCHours();
+	var min = myTime.getUTCMinutes();
+	var sec = myTime.getUTCSeconds();
+	var t = $(".ksEventTime",$(this.selector));
+	$(".timeH",t).val(hour);
+	$(".timeM",t).val(min);
+	$(".timeS",t).val(sec);	
+}
+// !EDITOR
+
 //]]>
 	</script>
 	<script type="text/javascript" src="http://kontestacja.googlecode.com/hg/catalog/main.js"></script>
@@ -222,9 +306,14 @@ $(document).ready(function(){
 		cssSelectorAncestor: "#jp_interface_0",
 	});
 	KonteStacja.Catalog.render("#ksCatalogContainer");
+	KonteStacja.Editor.selector = "#ksEditor";
+	KonteStacja.Editor.init();
+	$("#jPlayer0").bind($.jPlayer.event.timeupdate, function(event){ KonteStacja.Player.currentTime = event.jPlayer.status.currentTime;});
+	/*
 	initTimeSetter("#ksEditor .ksEventTime");
 	$("#ksEditor .ksPick").click(function(evt){ setTime("#ksEditor .ksEventTime", Math.floor(window.currentPlayerTime)); });
-	$("#jPlayer0").bind($.jPlayer.event.progress, function(event){ window.currentPlayerTime = event.jPlayer.status.currentTime;});
+	
+	*/
 	/*
 	
 	$("#ksEditor .ksTags").bind('keyup', function(evt){
