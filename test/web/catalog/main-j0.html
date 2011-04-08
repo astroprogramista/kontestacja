@@ -83,7 +83,7 @@
 		  <div class="ksTitle"></div>
 		  <div class="ksDescr"></div>
 		  <form>
-		  	<p>Tags:<input type="text" class="ksTags" /><button type="button" class="ksSave">save</button></p>
+		  	<p>Tags:<input type="text" class="ksTags" /><button type="button" class="ksSave">save</button><button type="button" class="ksSend">send</button></p>
 			Event:<input type="text" class="ksEvent" />Time:<span class="ksEventTime"></span><button type="button" class="ksPick" >pick</button><button type="button" class="ksPlay" >play</button><button type="button" class="ksAdd" >add</button>
 		    <div class="ksEvents">
 				
@@ -246,6 +246,7 @@ KonteStacja.Editor.init = function(){
 	$(".ksSave",$(this.selector)).click(function(){KonteStacja.Editor.save();});
 	$(".ksTags",$(this.selector)).bind("keyup",function(){ if(KonteStacja.Editor.user_tag)KonteStacja.Editor.user_tag.tags = $(this).val(); });
 	$(".ksPlay",$(this.selector)).click(function(){KonteStacja.Player.play(KonteStacja.Editor.getEventTime());});
+	$(".ksSend",$(this.selector)).click(function(){KonteStacja.Editor.send();});
 }
 KonteStacja.Editor.initEventTime = function (){
 	$(".ksEventTime",$(this.selector))
@@ -285,6 +286,29 @@ KonteStacja.Editor.setEventTime = function(sec){
 	$(".timeH",t).val(hour);
 	$(".timeM",t).val(min);
 	$(".timeS",t).val(sec);	
+}
+
+KonteStacja.Editor.send = function(){
+	var mail = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+	mail+="<user_tags>\n";
+	mail+="\t<user_tag>\n";
+	mail+="\t\t<episode>"+this.user_eid+"</episode>\n"
+	mail+="\t\t<tags><![CDATA["+this.user_tag.tags+"]]></tags>\n";
+	if(this.user_tag.events){
+		mail+="\t\t<events>\n";
+		for(var e in this.user_tag.events){
+			e = this.user_tag.events[e];
+			mail+="\t\t\t<event time=\""+e.t+"\"><![CDATA["+e.s+"]]></events>\n";
+		}
+		mail+="\t\t</events>\n";
+	}
+	mail+="\t</user_tag>\n";
+	mail+="</user_tags>\n";
+	//alert(mail);
+	var url = "mailto:kontest_katalog@o2.pl?subject=user_tags for "+this.user_eid+"&"+$.param({body: mail});
+	console.log(url);
+	var w = window.open(url, 'email');
+	w.close();
 }
 // !EDITOR
 
