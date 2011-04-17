@@ -570,5 +570,6 @@ KonteStacja.mainCatalogArrived(
 ,{"id":604,"date":"2011-04-16","broadcast":"Kazania wolnorynkowe Abrahama Gniadka","title":"niedziela palmowa","descr":"boża ekonomia zbawienia","mp3Url":"audio/25/abraham_2011-04-16.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/604_11-04-16_KazaniaWolnorynkowe.ogg"}
 ,{"id":605,"date":"2011-04-09","broadcast":"Kontesjonał","title":"Rewolucjonista cz. 1","descr":"Posłuchajcie! Dziś nagrywamy spot reklamowy zasiłków!","mp3Url":"audio/19/KS_2011-04-09.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/605_11-04-09_Kontesjonal.ogg"}
 ,{"id":606,"date":"2011-04-10","broadcast":"Kontesjonał","title":"Rewolucjonista cz.2","descr":"Dalej staramy się przekonać was do zasiłków!","mp3Url":"audio/19/KS_2011-04-10.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/606_11-04-10_Kontesjonal.ogg"}
+,{"id":607,"date":"2011-04-17","broadcast":"Kompas Polityczny","title":"Kompas Polityczny - Rozmowa z Got¹","descr":"","mp3Url":"audio/20/KS_2011-04-17.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/607_11-04-17_KompasPolityczny.ogg"}
 ]
 );
