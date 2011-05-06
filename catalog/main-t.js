@@ -602,5 +602,6 @@ KonteStacja.mainCatalogTableArrived(
 [636,"2011-05-05","Wydanie Główne - Marcin Hugo Kosiński","Ostatni raz przypieprzamy się do Kazika","A przy okazji, rozmawiamy o tym, jak NIK obnaża słabość wszelkich regulacji państwowych.","audio/KS_2011-05-05.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/636_11-05-05_WydanieGlowne.ogg"],
 [638,"2011-05-04","Jan Fijor zaprasza","Bin Laden, kibice i wasze pytania","Dziwimy się, jak ludzie, którzy ni","audio/3/KS_2011-05-04.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/638_11-05-04_JanFijorZaprasza.ogg"],
 [639,"2011-05-01","Kazania wolnorynkowe ks. Jacka Gniadka","Wolna ekonomia według bł. Jana Pawła II","Wolna ekonomia według bł. Jana Pawła II","audio/25/ksiadz_gniadek_2011-05-01.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/639_11-05-01_KazaniaWolnorynkoweJG.ogg"],
+[640,"2011-05-06","Komentarz ekonomiczny Instytutu Misesa","W poszukiwaniu wrogów klasowych","Komentarz ekonomiczny Instytutu Misesa na temat spekulacji.","audio/17/KS_2011-05-06.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/640_11-05-06_KEIM.ogg"],
 ]
 );

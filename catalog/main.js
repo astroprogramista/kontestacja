@@ -601,5 +601,6 @@ KonteStacja.mainCatalogArrived(
 ,{"id":636,"date":"2011-05-05","broadcast":"Wydanie Główne - Marcin Hugo Kosiński","title":"Ostatni raz przypieprzamy się do Kazika","descr":"A przy okazji, rozmawiamy o tym, jak NIK obnaża słabość wszelkich regulacji państwowych.","mp3Url":"audio/KS_2011-05-05.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/636_11-05-05_WydanieGlowne.ogg"}
 ,{"id":638,"date":"2011-05-04","broadcast":"Jan Fijor zaprasza","title":"Bin Laden, kibice i wasze pytania","descr":"Dziwimy się, jak ludzie, którzy ni","mp3Url":"audio/3/KS_2011-05-04.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/638_11-05-04_JanFijorZaprasza.ogg"}
 ,{"id":639,"date":"2011-05-01","broadcast":"Kazania wolnorynkowe ks. Jacka Gniadka","title":"Wolna ekonomia według bł. Jana Pawła II","descr":"Wolna ekonomia według bł. Jana Pawła II","mp3Url":"audio/25/ksiadz_gniadek_2011-05-01.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/639_11-05-01_KazaniaWolnorynkoweJG.ogg"}
+,{"id":640,"date":"2011-05-06","broadcast":"Komentarz ekonomiczny Instytutu Misesa","title":"W poszukiwaniu wrogów klasowych","descr":"Komentarz ekonomiczny Instytutu Misesa na temat spekulacji.","mp3Url":"audio/17/KS_2011-05-06.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/640_11-05-06_KEIM.ogg"}
 ]
 );
