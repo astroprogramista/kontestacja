@@ -613,5 +613,6 @@ KonteStacja.mainCatalogTableArrived(
 [647,"2011-05-12","Komentarz ekonomiczny Instytutu Misesa","Związek zawodowy a dobro wspólne","","audio/17/KS_2011-05-12.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/647_11-05-12_KEIM.ogg"],
 [648,"2011-05-12","Lewatywa Mózgu","Wódko ty moja polska!","O polskiej wódce - co o niej mówią postronni narodowie? I co o niej my mówimy?","audio/KS_2011-05-12.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/648_11-05-12_LewatywaMozgu.ogg"],
 [649,"2011-05-12","Prawniczek","Prawniczek o Grecji","O tym co prowadząca Prawniczka zobaczyła w Grecji. O ludziach, jedzeniu, kryzysie, psach, wolności, samochodach i wiele innych.","audio/21/KS_2011-05-12.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/649_11-05-12_Prawniczek.ogg"],
+[650,"2011-05-14","AGENTOMASZ","AGENTomasz - 14 maja 2011 - top10","Reżimowa odpowiedzialność rodziców za dziecko, publiczne koszty usuwania indywidualnych kaprysów i Sikorskiego zniżki dla gejów zza Buga. Te i inne informacje, które ukształtowały ubiegły tydzień, acz pozostały w posępnym cieniu transferu Arłukowicza, stadionowych zakazów i leczenia kaca po Osamowym karnawale.","audio/18/KS_2011-05-14.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/650_11-05-14_AGENTomasz.ogg"],
 ]
 );
