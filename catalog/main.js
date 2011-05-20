@@ -627,5 +627,6 @@ KonteStacja.mainCatalogArrived(
 ,{"id":662,"date":"2011-05-13","broadcast":"Kompas Polityczny","title":"Kompas Polityczny - O Arłukowiczu","descr":"","mp3Url":"audio/20/KS_2011-05-13.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/662_11-05-13_KompasPolityczny.ogg"}
 ,{"id":663,"date":"2011-05-19","broadcast":"Lewatywa Mózgu","title":"Złotówka to nie wszystko","descr":"O alternatywach dla złtówki: PayPal, MoneyBookers, BitCoin albo konta walutowe. Co jest fajne a co głupie?","mp3Url":"audio/KS_2011-05-19.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/663_11-05-19_LewatywaMozgu.ogg"}
 ,{"id":664,"date":"2011-05-19","broadcast":"Prawniczek","title":"Oskarżasz Czeczenów - licz się z konsekwencjami.","descr":"Dziś o różnych spojrzeniach na Czeczenów, którzy żyją na koszt polskich podatników. A na koniec historyjka o złych i dobrych politykach.","mp3Url":"audio/21/KS_2011-05-19.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/664_11-05-19_Prawniczek.ogg"}
+,{"id":665,"date":"2011-05-19","broadcast":"Komentarz ekonomiczny Instytutu Misesa","title":"Unia Europejska chce mieć internet jak w Chinach","descr":"","mp3Url":"audio/17/KS_2011-05-19.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/665_11-05-19_KEIM.ogg"}
 ]
 );
