@@ -656,5 +656,6 @@ KonteStacja.mainCatalogArrived(
 ,{"id":693,"date":"2011-06-02","broadcast":"Prawniczek","title":"Co młodzi Polacy myślą o prawie","descr":"Zobaczymy dzisiaj, co takiego nasze orły wiedzą o prawie.","mp3Url":"audio/21/KS_2011-06-02.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/693_11-06-02_Prawniczek.ogg"}
 ,{"id":696,"date":"2011-06-03","broadcast":"Kazania wolnorynkowe ks. Jacka Gniadka","title":"Działalność misyjna, a szacunek dla ludzkiej wolności","descr":"Uroczystość Wniebowstąpienia Pańskiego, Rok A.","mp3Url":"audio/25/ksiadz_gniadek_2011-06-5.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/696_11-06-03_KazaniaWolnorynkoweJG.ogg"}
 ,{"id":697,"date":"2011-06-01","broadcast":"Jan Fijor zaprasza","title":"Jan Fijor: Czy warto przewalutować kredyt we frankach?","descr":"Dziś Jan Fijor objeżdża polityków za wizytę Obamy, wyżywa sie na celniku, a następnie doradza w kwestii kredytów we frankach szwajcarskich.","mp3Url":"audio/3/KS_2011-06-01.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/697_11-06-01_JanFijorZaprasza.ogg"}
+,{"id":698,"date":"2011-06-06","broadcast":"OPAK","title":"OPAK 6-06-2011 Reaktywacja!","descr":"Minimalna reaktywacja OPAKu","mp3Url":"audio/14/KS_2011-06-06.mp3","oggUrl":"http://ia600403.us.archive.org/0/items/KonteStacja/698_11-06-06_OPAK.ogg"}
 ]
 );
