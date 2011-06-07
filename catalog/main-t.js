@@ -658,5 +658,6 @@ KonteStacja.mainCatalogTableArrived(
 [696,"2011-06-03","Kazania wolnorynkowe ks. Jacka Gniadka","Działalność misyjna, a szacunek dla ludzkiej wolności","Uroczystość Wniebowstąpienia Pańskiego, Rok A.","audio/25/ksiadz_gniadek_2011-06-5.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/696_11-06-03_KazaniaWolnorynkoweJG.ogg"],
 [697,"2011-06-01","Jan Fijor zaprasza","Jan Fijor: Czy warto przewalutować kredyt we frankach?","Dziś Jan Fijor objeżdża polityków za wizytę Obamy, wyżywa sie na celniku, a następnie doradza w kwestii kredytów we frankach szwajcarskich.","audio/3/KS_2011-06-01.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/697_11-06-01_JanFijorZaprasza.ogg"],
 [698,"2011-06-06","OPAK","OPAK 6-06-2011 Reaktywacja!","Minimalna reaktywacja OPAKu","audio/14/KS_2011-06-06.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/698_11-06-06_OPAK.ogg"],
+[699,"2011-06-06","Wydanie Główne","Sześciolatki do szkoły?","Dziś gość, Karolina Elbanowska, promotor akcji \u0026quot;Sześciolatki do przedszkola\u0026quot; mającej zapobiec posyłaniu 6-latków do szkoły, a 5-latków do przeszkola.","audio/KS_2011-06-06.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/699_11-06-06_WydanieGlowniejsze.ogg"],
 ]
 );
