@@ -679,5 +679,6 @@ KonteStacja.mainCatalogTableArrived(
 [717,"2011-06-16","Lewatywa Mózgu","LEWAtywa mózgu!  (1/2)","Martin wyznaje: jestem komunistą! Lewicowość prowadzącego ujawniona!","audio/KS_2011-06-16.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/717_11-06-16_LewatywaMozgu.ogg"],
 [718,"2011-06-16","Lewatywa Mózgu","LEWAtywa mózgu!  (2/2)","Martin wyznaje: jestem komunistą! Lewicowość prowadzącego ujawniona! Druga godzina audycji, w której więcej telefonów słuchaczy oraz więcej gadania o gejach i na koniec trochę poważniej o postawie wolnościowców.","audio/KS_2011-06-17.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/718_11-06-16_LewatywaMozgu.ogg"],
 [719,"2011-06-16","Prawniczek","Prawniczek wakacyjny - początek","Trochę o piwie, trochę o Włoszech i o karaniu za realizowanie marzeń.","audio/21/KS_2011-06-16.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/719_11-06-16_Prawniczek.ogg"],
+[720,"2011-06-19","Kazania wolnorynkowe ks. Jacka Gniadka","Bog_nie_jest_samotnym_indywiduum","\u0026quot;Bóg nie jest samotnym \u0027indywiduum\u0027\u0026quot; - Niedziela Trójcy wietej, Rok A, Wj 34, 4b-6. 8-9; 2 Kor 13, 11-13; J 3,16-18.","audio/25/Bog_nie_jest_samotnym_indywiduum.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/720_11-06-19_KazaniaWolnorynkoweJG.ogg"],
 ]
 );
