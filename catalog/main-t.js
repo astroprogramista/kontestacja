@@ -681,5 +681,7 @@ KonteStacja.mainCatalogTableArrived(
 [719,"2011-06-16","Prawniczek","Prawniczek wakacyjny - początek","Trochę o piwie, trochę o Włoszech i o karaniu za realizowanie marzeń.","audio/21/KS_2011-06-16.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/719_11-06-16_Prawniczek.ogg"],
 [720,"2011-06-19","Kazania wolnorynkowe ks. Jacka Gniadka","Bog_nie_jest_samotnym_indywiduum","\u0026quot;Bóg nie jest samotnym \u0027indywiduum\u0027\u0026quot; - Niedziela Trójcy wietej, Rok A, Wj 34, 4b-6. 8-9; 2 Kor 13, 11-13; J 3,16-18.","audio/25/Bog_nie_jest_samotnym_indywiduum.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/720_11-06-19_KazaniaWolnorynkoweJG.ogg"],
 [721,"2011-06-18","Teoria Chaosu","Ruch Dosyć, a konteStacja - Janusz Zagórski (gość)","Jak połączyć siły w walce z NWO lub systemem (jak kto woli). Z gościem rozmawiamy o Ruchu Dosyć, także o konteStacji, czy","audio/22/KS_2011-06-18.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/721_11-06-18_TeoriaChaosu.ogg"],
+[722,"2011-06-20","OPAK","OPAK 20-06-2011","O tym mowilismy:\r\nhttp://www.youtube.com/kontestacjakrk","audio/14/KS_2011-06-20.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/722_11-06-20_OPAK.ogg"],
+[723,"2011-06-20","Wydanie Główne","Wydanie G³ówne - O aborcji i stronie prawodonarodzin.pl z Mariuszem Dzier¿awskim","Audycja z gociem w zastêpstwie prowadzona przez Ob³awê. S³uchajcie i komentujcie!","audio/KS_2011-06-20.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/723_11-06-20_WydanieGlowniejsze.ogg"],
 ]
 );
