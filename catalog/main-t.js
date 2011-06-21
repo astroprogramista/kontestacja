@@ -683,5 +683,6 @@ KonteStacja.mainCatalogTableArrived(
 [721,"2011-06-18","Teoria Chaosu","Ruch Dosyć, a konteStacja - Janusz Zagórski (gość)","Jak połączyć siły w walce z NWO lub systemem (jak kto woli). Z gościem rozmawiamy o Ruchu Dosyć, także o konteStacji, czy","audio/22/KS_2011-06-18.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/721_11-06-18_TeoriaChaosu.ogg"],
 [722,"2011-06-20","OPAK","OPAK 20-06-2011","O tym mowilismy:\r\nhttp://www.youtube.com/kontestacjakrk","audio/14/KS_2011-06-20.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/722_11-06-20_OPAK.ogg"],
 [723,"2011-06-20","Wydanie Główne","Wydanie G³ówne - O aborcji i stronie prawodonarodzin.pl z Mariuszem Dzier¿awskim","Audycja z gociem w zastêpstwie prowadzona przez Ob³awê. S³uchajcie i komentujcie!","audio/KS_2011-06-20.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/723_11-06-20_WydanieGlowniejsze.ogg"],
+[724,"2011-06-21","Świat Kamila C.","Ewelina Wieczorek - Jak otworzyć fitness i pizzerie","Ewelina założyła Klub Fitness oraz Pizzerie, a na codzień zajmuje się poradami związanymi z odżywianiem.","audio/4/KS_2011-06-21.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/724_11-06-21_SwiatKamilaC.ogg"],
 ]
 );
