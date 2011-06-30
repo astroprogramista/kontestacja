@@ -700,5 +700,7 @@ KonteStacja.mainCatalogTableArrived(
 [738,"2011-06-28","Świat Kamila C.","Darek Boniukiewicz - Grupowa spółka bez opłat ZUSu","Darek zajmuje się organizowaniem ludzi w grupy, które wspólnie zakładają spółki z o.o., dzięki czemu nikt nie płaci ZUSu, a koszty prowadzenia spółki rozkładają się na kilka osób.","audio/4/KS_2011-06-28.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/738_11-06-28_SwiatKamilaC.ogg"],
 [739,"2011-06-23","Prawniczek","Komisyjni mordercy","Dziś o biurwach, co dla zasad zabiły dziecko i o podwyżkach dla tych, co nie mogą protestować.","audio/21/KS_2011-06-23.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/739_11-06-23_Prawniczek.ogg"],
 [740,"2011-06-29","Jan Fijor zaprasza","Czy Euro zachowuje się na odwrót?","Zaczęliśmy rozmawiać o Grecji, kiedy nasz słuchacz zapytał, dlaczego euro zamiast spadać to drożeje.","audio/3/KS_2011-06-29.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/740_11-06-29_JanFijorZaprasza.ogg"],
+[741,"2011-06-30","","Jak kraść by nie zostać złapanym.","Dziś o tym, co widzą kamery w supermarkecie, oraz o tym ile jest rodzajów żebraków.","audio//KS_2011-06-30.mp3",null],
+[742,"2011-06-30","Prawniczek","Jak kraść by nie zostać złapanym.","Dziś o tym, co widzą kamery w supermarkecie, oraz o tym ile jest rodzajów żebraków.","audio/21/KS_2011-06-30.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/742_11-06-30_Prawniczek.ogg"],
 ]
 );
