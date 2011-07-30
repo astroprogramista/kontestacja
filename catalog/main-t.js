@@ -741,5 +741,6 @@ KonteStacja.mainCatalogTableArrived(
 [782,"2011-07-27","Jan Fijor zaprasza","Czy hitler by zbudował OBI w Moskwie?","Wspólnie ze słuchaczami zastnawiamy się, czy mieszkańcom Rosji opłacało się walczyć z Hitlerem i jaka postawa doprowadziła by do tego, że w Moskwie szybciej by powstało OBI.","audio/3/KS_2011-07-27.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/782_11-07-27_JanFijorZaprasza.ogg"],
 [783,"2011-07-27","Lewatywa Mózgu","Sacred geometry - cz.1","Krawiec i Mapet rozmawiają o \u0026quot;świętej geometrii\u0026quot; i rzeczach z nią związanych. W zamierzeniu miał to być wstęp do następnych audycji. Jeśli będzie zainteresowanie, pociągniemy temat dalej.","audio/KS_2011-07-27.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/783_11-07-27_LewatywaMozgu.ogg"],
 [784,"2011-07-28","Lewatywa Mózgu","Sacred geometry - cz.2","Druga część audycji będącej wstępem do tematu \u0026quot;świętej geometrii\u0026quot;. Prowadzą Mapet i Krawiec.","audio/KS_2011-07-28.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/784_11-07-28_LewatywaMozgu.ogg"],
+[785,"2011-07-29","Komentarz ekonomiczny Instytutu Misesa","Lewica, prawica i buspasy","","audio/17/KS_2011-07-29.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/785_11-07-29_KEIM.ogg"],
 ]
 );
