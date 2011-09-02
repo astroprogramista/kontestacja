@@ -791,5 +791,7 @@ KonteStacja.mainCatalogTableArrived(
 [832,"2011-09-01","KontestKsiążki","Jak bezpiecznie jezdzic i zdac egzamin na prawo jazdy?","Poradnik Leszka Antoniego Wieczorka, przedsiêbiorcy, pasjonata pi³ki no¿nej i technik pamiêciowych","audio/12/KS_2011-09-01.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/832_11-09-01_KontestKsiazki.ogg"],
 [833,"2011-08-30","Świat Kamila C.","Sergiusz Prokurat - Robienie interesów w Azji","Rozmowa z Sergiuszem, który prowadzi firmy w Polsce oraz w Malezji.","audio/4/KS_2011-08-30.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/833_11-08-30_SwiatKamilaC.ogg"],
 [834,"2011-08-24","Jan Fijor zaprasza","Czy brać kredyt?","O kredytach i kartach kredytowych. Czy warto brać kartę kredytową? Jakie jest ryzyko?","audio/3/KS_2011-08-24.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/834_11-08-24_JanFijorZaprasza.ogg"],
+[835,"2011-08-25","Fridomia","Czy każdy może osiągnąć wolność finansową?","Co trzeba aby osiągnąć wolność finansową? Czy jest to możliwe?","audio/26/KS_2011-08-25.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/835_11-08-25_Fridomia.ogg"],
+[836,"2011-09-01","Prawniczek","Słowo o Greenpeace, radarach i straży oraz co ma wspólnego nadawanie z seksem.","Zakończnie sprawy Greenpeace, ciekawostki o radarach, walczących strażnikach i mózgu przy jedzeniu. Enjoy!","audio/21/KS_2011-09-01.mp3","http://ia600403.us.archive.org/0/items/KonteStacja/836_11-09-01_Prawniczek.ogg"],
 ]
 );
