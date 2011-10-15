@@ -105,6 +105,12 @@
 		KonteStacja.Player.play = function(sec){
 			$("#jPlayer0").jPlayer("play",sec);
 		}
+		
+		// forward
+		KonteStacja.Player.forward = function(sec){
+			KonteStacja.Player.play(KonteStacja.Player.currentTime+sec);	
+		}
+
 		KonteStacja.mainCatalogArrived = function(catalog){	
 			catalog = catalog.reverse();
 			KonteStacja.Catalog.main = catalog;		
@@ -333,6 +339,19 @@ $(document).ready(function(){
 	KonteStacja.Editor.selector = "#ksEditor";
 	KonteStacja.Editor.init();
 	$("#jPlayer0").bind($.jPlayer.event.timeupdate, function(event){ KonteStacja.Player.currentTime = event.jPlayer.status.currentTime;});
+
+	// forward
+	$("#ksEditor").keydown(function(e){
+		if(e.keyCode=='38'){
+			console.log('up');
+			KonteStacja.Player.forward(3);
+		}
+		else if(e.keyCode=='40'){
+			console.log('down');
+			KonteStacja.Player.forward(-3);
+		}
+	});
+
 	/*
 	initTimeSetter("#ksEditor .ksEventTime");
 	$("#ksEditor .ksPick").click(function(evt){ setTime("#ksEditor .ksEventTime", Math.floor(window.currentPlayerTime)); });
