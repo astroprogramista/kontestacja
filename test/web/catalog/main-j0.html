@@ -200,6 +200,19 @@ KonteStacja.Editor.delEvent = function (idx){
 	this.user_tag.events.splice(idx,1);
 	this.redrawEvents();
 }
+KonteStacja.Editor.getEditedEvent = function(){
+	var e = $(this.selector);
+	var ev = new Object();
+	ev.s = $(".ksEvent",e).val();
+	ev.t = this.getEventTime();
+	return ev;
+}
+KonteStacja.Editor.setEditedItem = function(ev){
+	var e = $(this.selector);
+	$(".ksEvent",e).val(ev.s);
+	this.setEventTime(ev.t);
+	return ev;
+}
 KonteStacja.Editor.addEditedEvent = function (){
 	var e = $(this.selector);
 	var ev = new Object();
@@ -225,7 +238,7 @@ KonteStacja.Editor.redrawEvents = function (){
 				text: KonteStacja.timeToString(ev.t)+" "+ev.s,
 				event_idx: i,
 				})
-				.click(ev.t, function(e){KonteStacja.Player.play(e.data); })
+				.click(ev, function(e){KonteStacja.Player.play(e.data.t); KonteStacja.Editor.setEditedItem(e.data); })
 				.append($("<button type='button'>del</button>")
 					.click(i, function(e){KonteStacja.Editor.delEvent(e.data);})
 				)
