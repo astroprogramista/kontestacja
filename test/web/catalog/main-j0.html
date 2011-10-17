@@ -253,8 +253,8 @@ KonteStacja.Editor.init = function(){
 	$(".ksTags",$(this.selector)).bind("keyup",function(){ if(KonteStacja.Editor.user_tag)KonteStacja.Editor.user_tag.tags = $(this).val(); });
 	$(".ksPlay",$(this.selector)).click(function(){KonteStacja.Player.play(KonteStacja.Editor.getEventTime());});
 	$(".ksSend",$(this.selector)).click(function(){KonteStacja.Editor.send();});
-	$(".ksPlus",$(this.selector)).click(function(){ KonteStacja.Editor.setEventTime(KonteStacja.Player.currentTime+1);$(".ksPlay").click();});
-	$(".ksMinus",$(this.selector)).click(function(){ KonteStacja.Editor.setEventTime(KonteStacja.Player.currentTime-1);$(".ksPlay").click();});
+	$(".ksPlus",$(this.selector)).click(function(){ KonteStacja.Editor.setEventTime(KonteStacja.Editor.getEventTime()+1);$(".ksPlay").click();});
+	$(".ksMinus",$(this.selector)).click(function(){ KonteStacja.Editor.setEventTime(KonteStacja.Editor.getEventTime()-1);$(".ksPlay").click();});
 }
 KonteStacja.Editor.initEventTime = function (){
 	$(".ksEventTime",$(this.selector))
